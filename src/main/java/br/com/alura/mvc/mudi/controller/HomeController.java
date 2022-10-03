@@ -15,7 +15,7 @@ import br.com.alura.mvc.mudi.model.StatusPedido;
 import br.com.alura.mvc.mudi.repository.PedidoRepository;
 
 //http://localhost:8080/home
-@Controller // para dizer que este método vai controlar alguma tela
+@Controller // para dizer que este mï¿½todo vai controlar alguma tela
 @RequestMapping("/home")
 public class HomeController {
 
@@ -23,12 +23,14 @@ public class HomeController {
 	@Autowired
 	private PedidoRepository repository;
 
-	// Model model é uma interface para mostrar coisas para o usuário
-	// Principal principal voce consegue recuperar dados do usuário logado e regras
+	// Model model ï¿½ uma interface para mostrar coisas para o usuï¿½rio
+	// Principal principal voce consegue recuperar dados do usuï¿½rio logado e regras
 	@GetMapping() // http://localhost:8080/home
 	public String home(Model model) {
 		System.out.println("----------------- HomeController /home");
-		List<Pedido> pedidos = repository.findAll();
+		// NÃ£o Ã© para buscar toda a lista de pedidos tem que ser por usuÃ¡rio
+		// List<Pedido> pedidos = repository.findAll();
+		List<Pedido> pedidos = repository.findAllByUsuario("");
 		model.addAttribute("pedidos", pedidos); // lista de pedidos que vai para a pagina html
 		return "home";
 	}
