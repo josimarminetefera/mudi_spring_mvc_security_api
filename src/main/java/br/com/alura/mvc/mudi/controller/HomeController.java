@@ -1,5 +1,6 @@
 package br.com.alura.mvc.mudi.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +24,14 @@ public class HomeController {
 	@Autowired
 	private PedidoRepository repository;
 
-	// Model model � uma interface para mostrar coisas para o usu�rio
-	// Principal principal voce consegue recuperar dados do usu�rio logado e regras
+	// Model model e uma interface para mostrar e enviar coisas para o usuario
+	// Principal principal voce consegue recuperar dados do usuario logado e regras
 	@GetMapping() // http://localhost:8080/home
-	public String home(Model model) {
+	public String home(Model model, Principal principal) {
 		System.out.println("----------------- HomeController /home");
 		// Não é para buscar toda a lista de pedidos tem que ser por usuário
 		// List<Pedido> pedidos = repository.findAll();
-		List<Pedido> pedidos = repository.findAllByUsuario("");
+		List<Pedido> pedidos = repository.findAllByUsuario(principal.getName());
 		model.addAttribute("pedidos", pedidos); // lista de pedidos que vai para a pagina html
 		return "home";
 	}

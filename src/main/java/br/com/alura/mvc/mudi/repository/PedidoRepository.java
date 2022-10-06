@@ -14,7 +14,7 @@ import br.com.alura.mvc.mudi.model.StatusPedido;
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
-	// Esta classe j� vem com o findAll nativo pois tem exte extends JpaRepository
+	// Esta classe ja vem com o findAll nativo pois tem exte extends JpaRepository
 
 	// busca pelo status
 	List<Pedido> findByStatus(StatusPedido aguardando);

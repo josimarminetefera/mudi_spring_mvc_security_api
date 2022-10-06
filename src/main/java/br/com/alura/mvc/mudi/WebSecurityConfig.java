@@ -39,7 +39,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			)
 			.logout(logout -> 
 				logout.logoutUrl("/logout")//deslogar o usuário
-			);
+			)
+			.csrf().disable(); // funcionalidade de segurança 
 	}
 	
 	@Override
