@@ -29,17 +29,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// http.authorizeRequests().anyRequest().authenticated().and().httpBasic();
 		
 		http.authorizeRequests() // obriga entrar autorizado
+			.antMatchers("/home/**").permitAll() // pagina home aceita sem estar logado
+			.antMatchers("/hello/**").permitAll() // pagina hello aceita acesso sem estar logado
 			.anyRequest() // qualquer request
 			.authenticated() // tem que estar autorizado
 			.and()
 			.formLogin(form -> 
 				form.loginPage("/login")
-				.defaultSuccessUrl("/home", true)
+				.defaultSuccessUrl("/usuario/pedido", true)
 				.permitAll() // login não precisa estar logado
 			)
-			.logout(logout -> 
-				logout.logoutUrl("/logout")//deslogar o usuário
-			)
+			.logout(logout -> {
+				logout.logoutUrl("/logout")
+				.logoutSuccessUrl("/home");
+			})// logout vai deslogar o usário 
 			.csrf().disable(); // funcionalidade de segurança 
 	}
 	
